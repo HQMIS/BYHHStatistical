@@ -20,12 +20,9 @@ class BYHH:
         pass
 
     def getCount(self, url):
-        userList = []
         r = requests.get(url)
         count =  r.text.split("><a href=bbsqry?userid=")[-2].split(">")[-4].split("<")[0]
-        tempList = r.text.split("><a href=bbsqry?userid=")[1:]
-        for i in tempList:
-            userList.append(i.split(">")[0])
+        userList = [i.split(">")[0] for i in r.text.split("><a href=bbsqry?userid=")[1:]]
         return count,  userList
         
     def spider(self):
